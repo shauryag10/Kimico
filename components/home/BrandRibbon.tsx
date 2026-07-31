@@ -1,3 +1,5 @@
+import { CandyTwist } from "@/components/ChocolateBits";
+
 const NAMES = [
   "Wonderbar",
   "Truffles",
@@ -25,7 +27,7 @@ export default function BrandRibbon() {
           <span className="mx-8 font-display text-2xl italic text-brand-gold/90 sm:text-3xl">
             {n}
           </span>
-          <span aria-hidden="true" className="h-1.5 w-1.5 rounded-full bg-brand-gold/50" />
+          <CandyTwist className="h-3.5 w-auto text-brand-gold/70" />
         </span>
       ))}
     </span>

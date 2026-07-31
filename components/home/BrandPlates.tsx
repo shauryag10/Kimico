@@ -9,7 +9,7 @@ export default function BrandPlates() {
         <Reveal>
           <Link
             href="/products?brand=Kimico"
-            className="group grain relative flex h-full flex-col items-center overflow-hidden rounded-t-[9rem] rounded-b-[2rem] bg-[linear-gradient(175deg,#b31218,#e01b22_55%,#8f0d13)] px-8 pb-10 pt-16 text-center shadow-card transition-transform duration-300 hover:-translate-y-1.5"
+            className="group plate relative flex h-full flex-col items-center overflow-hidden rounded-t-[9rem] rounded-b-[2rem] bg-[linear-gradient(175deg,#b31218,#e01b22_55%,#8f0d13)] px-8 pb-10 pt-16 text-center shadow-card transition-transform duration-300 hover:-translate-y-1.5"
           >
             <span
               aria-hidden="true"
@@ -37,7 +37,7 @@ export default function BrandPlates() {
         <Reveal delay={0.1}>
           <Link
             href="/products?brand=Kimmy"
-            className="group grain relative flex h-full flex-col items-center overflow-hidden rounded-t-[9rem] rounded-b-[2rem] border border-brand-gold/40 bg-[linear-gradient(175deg,#f4e9cf,#e9d29a_60%,#d9b968)] px-8 pb-10 pt-16 text-center shadow-card transition-transform duration-300 hover:-translate-y-1.5"
+            className="group plate relative flex h-full flex-col items-center overflow-hidden rounded-t-[9rem] rounded-b-[2rem] border border-brand-gold/40 bg-[linear-gradient(175deg,#f4e9cf,#e9d29a_60%,#d9b968)] px-8 pb-10 pt-16 text-center shadow-card transition-transform duration-300 hover:-translate-y-1.5"
           >
             <span className="rounded-full border border-cocoa/30 px-4 py-1 text-[0.65rem] font-semibold uppercase tracking-[0.3em] text-cocoa/80">
               The heritage mark

@@ -13,18 +13,12 @@ export default function CategoryIndex() {
     <section aria-labelledby="range-heading" className="py-24 lg:py-32">
       <div className="mx-auto max-w-[90rem] px-5 sm:px-10">
         <Reveal className="flex flex-wrap items-end justify-between gap-6">
-          <div>
-            <p className="flex items-center gap-4 text-[0.7rem] font-semibold uppercase tracking-[0.34em] text-brand-gold sm:text-xs">
-              <span aria-hidden="true" className="h-px w-10 bg-brand-gold" />
-              The range
-            </p>
-            <h2
-              id="range-heading"
-              className="display-soft mt-4 font-display text-4xl font-semibold text-cocoa sm:text-6xl"
-            >
-              Six families of sweetness
-            </h2>
-          </div>
+          <h2
+            id="range-heading"
+            className="display-soft max-w-2xl font-display text-4xl font-semibold text-cocoa sm:text-6xl"
+          >
+            Six families of sweetness
+          </h2>
           <p className="max-w-sm text-sm leading-relaxed text-ink-soft">
             Every one of our {products.length} products lives in one of these
             six ranges — press into any of them to browse the catalogue.
@@ -43,11 +37,8 @@ export default function CategoryIndex() {
                 >
                   <span
                     aria-hidden="true"
-                    className="absolute inset-0 origin-bottom scale-y-0 bg-(--acc) transition-transform duration-300 ease-out group-hover:scale-y-100"
+                    className="absolute inset-0 origin-bottom scale-y-0 bg-(--acc) transition-transform duration-300 ease-[cubic-bezier(0.23,1,0.32,1)] group-hover:scale-y-100"
                   />
-                  <span className="relative font-display text-sm italic text-ink-soft transition-colors duration-300 group-hover:text-cream/80 sm:text-base">
-                    {String(i + 1).padStart(2, "0")}
-                  </span>
                   <span className="display-soft relative flex-1 font-display text-[clamp(1.7rem,4.6vw,4rem)] font-semibold leading-none text-cocoa transition-colors duration-300 group-hover:text-cream">
                     {c.name}
                   </span>
@@ -56,10 +47,11 @@ export default function CategoryIndex() {
                   </span>
                   <span className="relative rounded-full border border-cocoa/25 px-3.5 py-1.5 text-xs font-semibold text-cocoa transition-colors duration-300 group-hover:border-cream/40 group-hover:text-cream">
                     {count}
+                    <span className="sr-only"> products</span>
                   </span>
                   <span
                     aria-hidden="true"
-                    className="relative grid h-11 w-11 shrink-0 place-items-center rounded-full border border-cocoa/25 text-cocoa transition-all duration-300 group-hover:rotate-45 group-hover:border-cream/40 group-hover:text-cream"
+                    className="relative grid h-11 w-11 shrink-0 place-items-center rounded-full border border-cocoa/25 text-cocoa transition-[transform,border-color,color] duration-300 ease-[cubic-bezier(0.23,1,0.32,1)] group-hover:rotate-45 group-hover:border-cream/40 group-hover:text-cream"
                   >
                     <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
                       <path
@@ -73,7 +65,7 @@ export default function CategoryIndex() {
                   </span>
                   <span
                     aria-hidden="true"
-                    className="pointer-events-none absolute right-[38%] top-1/2 z-10 hidden h-[5.5rem] w-40 -translate-y-1/2 rotate-6 scale-50 opacity-0 drop-shadow-[0_18px_22px_rgba(0,0,0,0.35)] transition-all duration-300 ease-out group-hover:scale-100 group-hover:opacity-100 lg:block"
+                    className="pointer-events-none absolute right-[38%] top-1/2 z-10 hidden h-[5.5rem] w-40 -translate-y-1/2 rotate-6 scale-50 opacity-0 drop-shadow-[0_18px_22px_rgba(0,0,0,0.35)] transition-[transform,opacity] duration-300 ease-[cubic-bezier(0.23,1,0.32,1)] group-hover:scale-100 group-hover:opacity-100 lg:block"
                   >
                     <Image
                       src={c.image}

@@ -3,6 +3,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { motion, useReducedMotion } from "framer-motion";
+import { ChocoPiece } from "@/components/ChocolateBits";
 import { Parallax } from "@/components/motion";
 import { COMPANY } from "@/lib/site";
 
@@ -16,7 +17,7 @@ export default function Hero() {
   });
 
   return (
-    <section className="grain relative overflow-hidden bg-[linear-gradient(168deg,#f6f1ea_0%,#f5ecdb_52%,#eeddba_100%)]">
+    <section className="plate relative overflow-hidden bg-[linear-gradient(168deg,#f6f1ea_0%,#f5ecdb_52%,#eeddba_100%)]">
       <div
         aria-hidden="true"
         className="absolute -right-40 top-0 h-[38rem] w-[38rem] rounded-full bg-[radial-gradient(circle,rgba(201,162,39,0.2),transparent_62%)]"
@@ -70,7 +71,7 @@ export default function Hero() {
           </motion.span>
         </h1>
 
-        <div className="grid items-start gap-x-8 gap-y-10 pb-4 pt-10 lg:grid-cols-[0.9fr_1.1fr] lg:pt-14">
+        <div className="grid items-start gap-x-8 gap-y-10 pb-4 pt-10 lg:grid-cols-[0.9fr_1.1fr] lg:pb-24 lg:pt-14">
           <div className="max-w-md">
             <motion.p {...rise(0.28)} className="text-base leading-relaxed text-ink-soft sm:text-lg">
               {COMPANY.subTagline} Chocolates, truffles, caramels, toffees and
@@ -80,7 +81,7 @@ export default function Hero() {
             <motion.div {...rise(0.36)} className="mt-8 flex flex-wrap items-center gap-4">
               <Link
                 href="/products"
-                className="group inline-flex items-center gap-3 rounded-full bg-cocoa px-7 py-4 text-sm font-semibold text-cream shadow-lift transition-all hover:-translate-y-0.5 hover:bg-brand-red"
+                className="press group inline-flex items-center gap-3 rounded-full bg-cocoa px-7 py-4 text-sm font-semibold text-cream shadow-lift transition-[transform,background-color] hover:bg-brand-red"
               >
                 Explore the range
                 <svg width="15" height="15" viewBox="0 0 16 16" fill="none" aria-hidden="true" className="transition-transform duration-300 group-hover:translate-x-1">
@@ -89,20 +90,10 @@ export default function Hero() {
               </Link>
               <Link
                 href="/contact"
-                className="rounded-full border-2 border-cocoa/25 px-7 py-[0.9rem] text-sm font-semibold text-cocoa transition-colors hover:border-brand-red hover:text-brand-red"
+                className="press rounded-full border-2 border-cocoa/25 px-7 py-[0.9rem] text-sm font-semibold text-cocoa transition-[transform,border-color,color] hover:border-brand-red hover:text-brand-red"
               >
                 Become a distributor
               </Link>
-            </motion.div>
-            <motion.div
-              {...rise(0.44)}
-              className="mt-10 hidden max-w-[15rem] border-l-2 border-brand-gold/50 pl-5 lg:block"
-            >
-              <p className="font-display text-4xl font-semibold text-cocoa">49</p>
-              <p className="mt-1 text-sm leading-snug text-ink-soft">
-                products across six families — bars, truffles, toffees,
-                jellies, jars and toys.
-              </p>
             </motion.div>
           </div>
 
@@ -181,6 +172,29 @@ export default function Hero() {
           </div>
         </div>
       </div>
+
+      {/* scroll-down cue */}
+      <motion.a
+        initial={reduce ? false : { opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 0.5, delay: 1 }}
+        href="#range-heading"
+        aria-label="Scroll down to explore the ranges"
+        className="group absolute bottom-4 left-5 hidden flex-col items-center gap-2.5 sm:left-10 lg:flex"
+      >
+        <span className="text-[0.6rem] font-semibold uppercase tracking-[0.32em] text-cocoa-soft transition-colors group-hover:text-brand-red">
+          Scroll
+        </span>
+        <span className="relative h-14 w-4">
+          <span
+            aria-hidden="true"
+            className="absolute left-1/2 top-0 h-full w-px -translate-x-1/2 bg-cocoa/20"
+          />
+          <span className="scroll-cue-dot absolute left-1/2 top-0">
+            <ChocoPiece className="h-3 w-3" />
+          </span>
+        </span>
+      </motion.a>
     </section>
   );
 }

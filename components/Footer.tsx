@@ -5,7 +5,7 @@ import { CATALOGUE_PDF, COMPANY } from "@/lib/site";
 
 export default function Footer() {
   return (
-    <footer className="bg-cocoa text-cream/80">
+    <footer className="on-dark bg-cocoa text-cream/80">
       <div className="mx-auto max-w-7xl px-5 py-16 sm:px-8">
         <div className="grid gap-12 md:grid-cols-[1.4fr_1fr_1fr_1.2fr]">
           <div>
@@ -48,7 +48,10 @@ export default function Footer() {
                 { href: "/contact", label: "Contact & distribution" },
               ].map((l) => (
                 <li key={l.href}>
-                  <Link href={l.href} className="transition-colors hover:text-cream">
+                  <Link
+                    href={l.href}
+                    className="inline-block py-1 transition-colors hover:text-cream"
+                  >
                     {l.label}
                   </Link>
                 </li>
@@ -57,7 +60,7 @@ export default function Footer() {
                 <a
                   href={CATALOGUE_PDF}
                   download
-                  className="inline-flex items-center gap-2 transition-colors hover:text-cream"
+                  className="inline-flex items-center gap-2 py-1 transition-colors hover:text-cream"
                 >
                   Download catalogue
                   <svg width="12" height="12" viewBox="0 0 16 16" fill="none" aria-hidden="true">
@@ -83,7 +86,7 @@ export default function Footer() {
                 <li key={c.slug}>
                   <Link
                     href={`/products?category=${c.slug}`}
-                    className="transition-colors hover:text-cream"
+                    className="inline-block py-1 transition-colors hover:text-cream"
                   >
                     {c.name}
                   </Link>

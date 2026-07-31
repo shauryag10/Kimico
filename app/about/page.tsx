@@ -51,7 +51,7 @@ export default function AboutPage() {
   return (
     <div>
       {/* Cocoa hero */}
-      <section className="grain relative overflow-hidden bg-cocoa text-cream">
+      <section className="on-dark plate relative overflow-hidden bg-cocoa text-cream">
         <Image
           src="/brand/texture-cocoa.webp"
           alt=""
@@ -66,11 +66,7 @@ export default function AboutPage() {
           ’88
         </span>
         <div className="relative mx-auto max-w-[90rem] px-5 py-24 sm:px-10 lg:py-32">
-          <p className="flex items-center gap-4 text-[0.7rem] font-semibold uppercase tracking-[0.34em] text-brand-gold sm:text-xs">
-            <span aria-hidden="true" className="h-px w-10 bg-brand-gold" />
-            Our story
-          </p>
-          <h1 className="display-soft mt-5 max-w-4xl font-display text-5xl font-semibold leading-[1.0] sm:text-7xl">
+          <h1 className="display-soft max-w-4xl font-display text-5xl font-semibold leading-[1.0] sm:text-7xl">
             Thirty-eight years of{" "}
             <em className="text-foil display-wonk italic">sweet moments</em>
           </h1>
@@ -113,33 +109,32 @@ export default function AboutPage() {
             <div className="mt-8 flex flex-wrap gap-4">
               <Link
                 href="/products"
-                className="rounded-full bg-cocoa px-7 py-3.5 text-sm font-semibold text-cream transition-colors hover:bg-brand-red"
+                className="press rounded-full bg-cocoa px-7 py-3.5 text-sm font-semibold text-cream transition-[transform,background-color] hover:bg-brand-red"
               >
                 Browse the range
               </Link>
               <Link
                 href="/contact"
-                className="rounded-full border-2 border-cocoa/25 px-7 py-[0.8rem] text-sm font-semibold text-cocoa transition-colors hover:border-brand-red hover:text-brand-red"
+                className="press rounded-full border-2 border-cocoa/25 px-7 py-[0.8rem] text-sm font-semibold text-cocoa transition-[transform,border-color,color] hover:border-brand-red hover:text-brand-red"
               >
                 Talk distribution
               </Link>
             </div>
           </Reveal>
-          <div className="grid content-start gap-5">
+          <dl className="content-start self-center border-t border-brand-gold/40">
             {VALUES.map((v, i) => (
               <Reveal key={v.title} delay={i * 0.08}>
-                <div className="rounded-3xl border border-brand-gold/30 bg-white/70 p-7 shadow-card">
-                  <p className="font-display text-2xl font-semibold text-cocoa">
-                    <span aria-hidden="true" className="mr-3 font-display italic text-brand-gold">
-                      {String(i + 1).padStart(2, "0")}
-                    </span>
+                <div className="border-b border-brand-gold/40 py-7">
+                  <dt className="font-display text-2xl font-semibold text-cocoa">
                     {v.title}
-                  </p>
-                  <p className="mt-2.5 text-sm leading-relaxed text-ink-soft">{v.body}</p>
+                  </dt>
+                  <dd className="mt-2 max-w-md text-sm leading-relaxed text-ink-soft">
+                    {v.body}
+                  </dd>
                 </div>
               </Reveal>
             ))}
-          </div>
+          </dl>
         </div>
       </section>
 
@@ -147,15 +142,11 @@ export default function AboutPage() {
       <section aria-labelledby="timeline-heading" className="bg-cream-deep/60 py-24">
         <div className="mx-auto max-w-[90rem] px-5 sm:px-10">
           <Reveal>
-            <p className="flex items-center gap-4 text-[0.7rem] font-semibold uppercase tracking-[0.34em] text-brand-gold sm:text-xs">
-              <span aria-hidden="true" className="h-px w-10 bg-brand-gold" />
-              Milestones
-            </p>
             <h2
               id="timeline-heading"
-              className="display-soft mt-4 font-display text-4xl font-semibold text-cocoa sm:text-5xl"
+              className="display-soft font-display text-4xl font-semibold text-cocoa sm:text-5xl"
             >
-              {COMPANY.founded} → today
+              Milestones, {COMPANY.founded} → today
             </h2>
           </Reveal>
           <ol className="mt-14 space-y-0">
@@ -192,7 +183,7 @@ export default function AboutPage() {
       {/* Location band */}
       <section aria-labelledby="visit-heading" className="mx-auto max-w-[90rem] px-5 py-24 sm:px-10">
         <Reveal>
-          <div className="grain relative overflow-hidden rounded-[2.5rem] bg-[linear-gradient(150deg,#46281a,#2a1810)] px-8 py-14 text-cream sm:px-14">
+          <div className="on-dark plate relative overflow-hidden rounded-[2.5rem] bg-[linear-gradient(150deg,#46281a,#2a1810)] px-8 py-14 text-cream sm:px-14">
             <span
               aria-hidden="true"
               className="pointer-events-none absolute -right-4 -top-10 select-none font-display text-[12rem] font-semibold italic leading-none text-brand-gold opacity-15"
@@ -207,7 +198,7 @@ export default function AboutPage() {
                 >
                   Made in Ahmedabad. Wrapped for everywhere.
                 </h2>
-                <address className="mt-5 max-w-md text-base not-italic leading-relaxed text-cream/75">
+                <address className="mt-5 max-w-md text-pretty text-base not-italic leading-relaxed text-cream/75">
                   {COMPANY.name} · {COMPANY.address}
                 </address>
                 <p className="mt-3 text-sm text-cream/75">
@@ -219,7 +210,7 @@ export default function AboutPage() {
               </div>
               <Link
                 href="/contact"
-                className="justify-self-start rounded-full bg-brand-gold px-8 py-4 text-sm font-bold text-cocoa transition-all hover:-translate-y-0.5 hover:bg-brand-gold-soft lg:justify-self-end"
+                className="press justify-self-start rounded-full bg-brand-gold px-8 py-4 text-sm font-bold text-cocoa transition-[transform,background-color] hover:bg-brand-gold-soft lg:justify-self-end"
               >
                 Plan a conversation
               </Link>

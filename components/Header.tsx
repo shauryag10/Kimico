@@ -4,6 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
+import ScrollProgress from "@/components/ScrollProgress";
 import { CATALOGUE_PDF } from "@/lib/site";
 
 const NAV = [
@@ -25,11 +26,26 @@ export default function Header() {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
+  // Escape closes the mobile menu; the body lock stops the page scrolling behind it.
+  useEffect(() => {
+    if (!open) return;
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") setOpen(false);
+    };
+    document.addEventListener("keydown", onKey);
+    const { overflow } = document.body.style;
+    document.body.style.overflow = "hidden";
+    return () => {
+      document.removeEventListener("keydown", onKey);
+      document.body.style.overflow = overflow;
+    };
+  }, [open]);
+
   const closeMenu = () => setOpen(false);
 
   return (
     <header
-      className={`sticky top-0 z-50 border-b transition-all duration-300 ${
+      className={`sticky top-0 z-50 border-b transition-[background-color,border-color,box-shadow] duration-300 ${
         scrolled || open
           ? "border-cocoa/10 bg-cream/90 shadow-[0_8px_30px_-18px_rgb(42_24_16/0.35)] backdrop-blur-md"
           : "border-transparent bg-cream/60 backdrop-blur-sm"
@@ -38,7 +54,7 @@ export default function Header() {
       <div className="mx-auto flex max-w-7xl items-center justify-between gap-6 px-5 sm:px-8">
         <Link
           href="/"
-          className={`flex shrink-0 items-center transition-all duration-300 ${
+          className={`flex shrink-0 items-center rounded-md transition-[padding] duration-300 ${
             scrolled ? "py-2.5" : "py-4"
           }`}
           aria-label="Kimico Foods — home"
@@ -50,7 +66,7 @@ export default function Header() {
             height={308}
             priority
             sizes="120px"
-            className={`w-auto transition-all duration-300 ${scrolled ? "h-8" : "h-10"}`}
+            className={`w-auto transition-[height] duration-300 ${scrolled ? "h-8" : "h-10"}`}
           />
         </Link>
 
@@ -61,7 +77,8 @@ export default function Header() {
               <Link
                 key={item.href}
                 href={item.href}
-                className={`text-[0.95rem] tracking-wide transition-colors hover:text-brand-red ${
+                aria-current={active ? "page" : undefined}
+                className={`nav-link text-[0.95rem] tracking-wide transition-colors hover:text-brand-red ${
                   active ? "font-semibold text-brand-red" : "text-ink/80"
                 }`}
               >
@@ -75,7 +92,7 @@ export default function Header() {
           <a
             href={CATALOGUE_PDF}
             download
-            className="inline-flex items-center gap-2 rounded-full border border-cocoa/20 px-4 py-2 text-sm font-medium text-cocoa transition-colors hover:border-brand-gold hover:bg-brand-gold/10"
+            className="press inline-flex items-center gap-2 rounded-full border border-cocoa/20 px-4 py-2 text-sm font-medium text-cocoa transition-[transform,border-color,background-color] hover:border-brand-gold hover:bg-brand-gold/10"
           >
             <svg width="14" height="14" viewBox="0 0 16 16" fill="none" aria-hidden="true">
               <path
@@ -90,7 +107,7 @@ export default function Header() {
           </a>
           <Link
             href="/contact"
-            className="rounded-full bg-brand-red px-5 py-2 text-sm font-semibold text-white shadow-sm transition-colors hover:bg-brand-red-deep"
+            className="press rounded-full bg-brand-red px-5 py-2 text-sm font-semibold text-white shadow-sm transition-[transform,background-color] hover:bg-brand-red-deep"
           >
             Enquire
           </Link>
@@ -102,7 +119,7 @@ export default function Header() {
           aria-expanded={open}
           aria-controls="mobile-nav"
           aria-label={open ? "Close menu" : "Open menu"}
-          className="rounded-md p-2 text-cocoa md:hidden"
+          className="press -mr-2 rounded-md p-2 text-cocoa md:hidden"
         >
           <svg width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true">
             {open ? (
@@ -128,7 +145,7 @@ export default function Header() {
         <nav
           id="mobile-nav"
           aria-label="Mobile"
-          className="border-t border-cocoa/10 bg-cream px-5 pb-6 pt-2 md:hidden"
+          className="menu-open border-t border-cocoa/10 bg-cream px-5 pb-6 pt-2 md:hidden"
         >
           <ul className="flex flex-col">
             {NAV.map((item) => (
@@ -165,6 +182,7 @@ export default function Header() {
           </div>
         </nav>
       )}
+      <ScrollProgress />
     </header>
   );
 }

@@ -78,24 +78,18 @@ export default function FeaturedRanges() {
     <section aria-labelledby="featured-heading" className="py-24 lg:py-32">
       <div className="mx-auto max-w-[90rem] px-5 sm:px-10">
         <Reveal className="flex flex-wrap items-end justify-between gap-6">
-          <div>
-            <p className="flex items-center gap-4 text-[0.7rem] font-semibold uppercase tracking-[0.34em] text-brand-gold sm:text-xs">
-              <span aria-hidden="true" className="h-px w-10 bg-brand-gold" />
-              Featured ranges
-            </p>
-            <h2
-              id="featured-heading"
-              className="display-soft mt-4 font-display text-4xl font-semibold text-cocoa sm:text-6xl"
-            >
-              The house favourites
-            </h2>
-          </div>
+          <h2
+            id="featured-heading"
+            className="display-soft font-display text-4xl font-semibold text-cocoa sm:text-6xl"
+          >
+            The house favourites
+          </h2>
           <div className="flex gap-3">
             <button
               type="button"
               onClick={() => nudge(-1)}
               aria-label="Previous range"
-              className="grid h-12 w-12 place-items-center rounded-full bg-cocoa text-cream transition-colors hover:bg-brand-red"
+              className="press grid h-12 w-12 place-items-center rounded-full bg-cocoa text-cream transition-[transform,background-color] hover:bg-brand-red"
             >
               <svg width="17" height="17" viewBox="0 0 16 16" fill="none" aria-hidden="true">
                 <path d="M10 3 5 8l5 5" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
@@ -105,7 +99,7 @@ export default function FeaturedRanges() {
               type="button"
               onClick={() => nudge(1)}
               aria-label="Next range"
-              className="grid h-12 w-12 place-items-center rounded-full bg-cocoa text-cream transition-colors hover:bg-brand-red"
+              className="press grid h-12 w-12 place-items-center rounded-full bg-cocoa text-cream transition-[transform,background-color] hover:bg-brand-red"
             >
               <svg width="17" height="17" viewBox="0 0 16 16" fill="none" aria-hidden="true">
                 <path d="m6 3 5 5-5 5" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
@@ -119,12 +113,12 @@ export default function FeaturedRanges() {
         ref={track}
         className="no-scrollbar mt-12 flex snap-x snap-mandatory gap-6 overflow-x-auto scroll-px-5 px-5 sm:scroll-px-10 sm:px-10 lg:scroll-px-[max(2.5rem,calc((100vw-90rem)/2+2.5rem))] lg:px-[max(2.5rem,calc((100vw-90rem)/2+2.5rem))]"
       >
-        {SLIDES.map((s, i) => (
+        {SLIDES.map((s) => (
           <Link
             key={s.name}
             href={s.href}
             data-slide
-            className={`group grain relative flex w-[86vw] max-w-[540px] shrink-0 snap-start flex-col overflow-hidden rounded-[2rem] ${s.panel} px-9 pb-9 pt-9 shadow-card transition-transform duration-300 hover:-translate-y-2 sm:w-[62vw] lg:w-[31vw]`}
+            className={`group plate relative flex w-[86vw] max-w-[540px] shrink-0 snap-start flex-col overflow-hidden rounded-[2rem] ${s.panel} px-9 pb-9 pt-9 shadow-card transition-transform duration-300 hover:-translate-y-2 sm:w-[62vw] lg:w-[31vw]`}
           >
             <span
               aria-hidden="true"
@@ -143,7 +137,7 @@ export default function FeaturedRanges() {
               />
             </div>
             <p className={`mt-6 text-[0.65rem] font-semibold uppercase tracking-[0.3em] ${s.kicker}`}>
-              {String(i + 1).padStart(2, "0")} — Premium range
+              Premium range
             </p>
             <h3 className={`display-soft mt-2 font-display text-4xl font-semibold ${s.text}`}>
               {s.name}

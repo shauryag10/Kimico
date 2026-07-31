@@ -11,10 +11,10 @@ export default function ProductCard({ product }: { product: PublicProduct }) {
   ].filter(Boolean);
 
   return (
-    <article className="group relative flex h-full flex-col overflow-hidden rounded-[1.75rem] bg-white shadow-card transition-all duration-300 hover:-translate-y-1.5 hover:shadow-lift">
+    <article className="group relative flex h-full flex-col overflow-hidden rounded-[1.25rem] bg-white shadow-card transition-[transform,box-shadow] duration-300 ease-[cubic-bezier(0.23,1,0.32,1)] hover:-translate-y-1.5 hover:shadow-lift">
       <Link
         href={`/products/${product.slug}`}
-        className="flex flex-1 flex-col focus-visible:outline-none"
+        className="flex flex-1 flex-col rounded-[1.25rem]"
         aria-label={`${product.name} — view details`}
       >
         <div
@@ -60,10 +60,11 @@ export default function ProductCard({ product }: { product: PublicProduct }) {
       <div className="px-5 pb-5">
         <Link
           href={`/contact?sku=${product.code}`}
-          className="inline-flex items-center gap-2 text-sm font-semibold text-brand-red transition-colors hover:text-brand-red-deep"
+          className="inline-flex items-center gap-2 rounded-full text-sm font-semibold text-brand-red transition-colors hover:text-brand-red-deep"
         >
           Request pricing
-          <svg width="13" height="13" viewBox="0 0 16 16" fill="none" aria-hidden="true" className="transition-transform duration-300 group-hover:translate-x-0.5">
+          <span className="sr-only"> for {product.name}</span>
+          <svg width="13" height="13" viewBox="0 0 16 16" fill="none" aria-hidden="true" className="transition-transform duration-300 ease-[cubic-bezier(0.23,1,0.32,1)] group-hover:translate-x-0.5">
             <path d="M2 8h11M9 3.5 13.5 8 9 12.5" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round" />
           </svg>
         </Link>

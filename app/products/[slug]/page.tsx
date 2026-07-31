@@ -3,6 +3,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import ProductCard from "@/components/ProductCard";
+import { Reveal } from "@/components/motion";
 import { products } from "@/data/products";
 import {
   categoryMeta,
@@ -104,8 +105,9 @@ export default async function ProductDetailPage({ params }: { params: Params }) 
 
         <div className="mt-8 grid gap-10 lg:grid-cols-[1.05fr_0.95fr] lg:gap-16">
           {/* Image plate */}
+          <Reveal>
           <div
-            className="grain relative flex min-h-[22rem] items-center justify-center overflow-hidden rounded-[2.5rem] p-10 sm:min-h-[28rem]"
+            className="plate relative flex h-full min-h-[22rem] items-center justify-center overflow-hidden rounded-[2.5rem] p-10 sm:min-h-[28rem]"
             style={{
               background: `linear-gradient(150deg, ${meta.tint} 0%, #ffffff 100%)`,
             }}
@@ -125,8 +127,10 @@ export default async function ProductDetailPage({ params }: { params: Params }) 
               className="max-h-[26rem] w-auto max-w-full object-contain drop-shadow-[0_34px_38px_rgba(42,24,16,0.3)]"
             />
           </div>
+          </Reveal>
 
           {/* Details */}
+          <Reveal delay={0.1}>
           <div>
             <div className="flex flex-wrap items-center gap-3">
               <span
@@ -187,7 +191,7 @@ export default async function ProductDetailPage({ params }: { params: Params }) 
             <div className="mt-9 flex flex-wrap items-center gap-4">
               <Link
                 href={`/contact?sku=${product.code}`}
-                className="rounded-full bg-brand-red px-8 py-4 text-sm font-semibold text-white shadow-lift transition-all hover:-translate-y-0.5 hover:bg-brand-red-deep"
+                className="press rounded-full bg-brand-red px-8 py-4 text-sm font-semibold text-white shadow-lift transition-[transform,background-color] hover:bg-brand-red-deep"
               >
                 Enquire about this product
               </Link>
@@ -203,6 +207,7 @@ export default async function ProductDetailPage({ params }: { params: Params }) 
               request — mention item code {product.code} in your enquiry.
             </p>
           </div>
+          </Reveal>
         </div>
 
         {related.length > 0 && (

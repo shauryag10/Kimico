@@ -8,8 +8,8 @@ export default function EnquiryBand() {
   return (
     <section
       aria-labelledby="stock-heading"
-      className="grain relative overflow-hidden bg-[linear-gradient(140deg,#b31218,#e01b22_55%,#9c0f15)] text-white"
-  >
+      className="on-dark plate relative overflow-hidden bg-[linear-gradient(140deg,#b31218,#e01b22_55%,#9c0f15)] text-white"
+    >
       <span
         aria-hidden="true"
         className="pointer-events-none absolute -left-16 -top-20 h-80 w-80 rounded-full bg-[radial-gradient(circle,rgba(255,255,255,0.16),transparent_65%)]"
@@ -45,13 +45,9 @@ export default function EnquiryBand() {
 
       <div className="relative mx-auto max-w-[90rem] px-5 py-24 sm:px-10 lg:py-32">
         <Reveal>
-          <p className="flex items-center gap-4 text-[0.7rem] font-semibold uppercase tracking-[0.34em] text-white/80 sm:text-xs">
-            <span aria-hidden="true" className="h-px w-10 bg-white/60" />
-            Stocking Kimico
-          </p>
           <h2
             id="stock-heading"
-            className="display-soft mt-5 max-w-3xl font-display text-4xl font-semibold leading-[1.02] sm:text-6xl"
+            className="display-soft max-w-3xl font-display text-4xl font-semibold leading-[1.02] sm:text-6xl"
           >
             Put <em className="italic">happiness</em> on your shelves
           </h2>
@@ -65,7 +61,7 @@ export default function EnquiryBand() {
           <div className="mt-10 flex flex-wrap items-center gap-6">
             <Link
               href="/contact"
-              className="rounded-full bg-white px-8 py-4 text-sm font-bold text-brand-red shadow-lift transition-all hover:-translate-y-0.5 hover:bg-cream"
+              className="press rounded-full bg-white px-8 py-4 text-sm font-bold text-brand-red shadow-lift transition-[transform,background-color] hover:bg-cream"
             >
               Start a distributor enquiry
             </Link>

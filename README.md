@@ -96,6 +96,17 @@ Field validation rules are shared between client and server in
 - SEO: per-page metadata, JSON-LD `Organization` (layout) and `Product`
   (detail pages, deliberately without offers/prices), `app/sitemap.ts`,
   `app/robots.ts`, `app/opengraph-image.png`.
-- `scripts/shoot.mjs` is a dev utility that captures full-page screenshots at
-  375/768/1440 px using the local Chrome install:
-  `node scripts/shoot.mjs http://localhost:3000 ./shots home`
+### Dev utilities (`scripts/`)
+
+All three drive the local Chrome install against a running dev server:
+
+```bash
+node scripts/shoot.mjs    http://localhost:3000 ./shots home   # full-page shots at 375/768/1440
+node scripts/inspect.mjs  http://localhost:3000 ./shots        # every route x desktop+mobile, plus a defect scan
+node scripts/qa-crawl.mjs http://localhost:3000                # asserts no ₹, no broken images/alts, filter counts
+```
+
+`inspect.mjs` flags console errors, failed requests, horizontal overflow,
+interactive elements with no focus indicator, sub-24px tap targets and links
+with no accessible name. Inline text links inside prose legitimately report as
+small targets — WCAG 2.5.8 exempts them.

@@ -32,17 +32,16 @@
   --font-sans: var(--font-inter);
 
   --shadow-lift: 0 24px 48px -20px rgb(42 24 16 / 0.28);
-  --shadow-card: 0 1px 2px rgb(42 24 16 / 0.05), 0 12px 32px -18px rgb(42 24 16 / 0.18);
-  --shadow-float: 0 32px 56px -24px rgb(42 24 16 / 0.4);
+  --shadow-card: 0 12px 32px -18px rgb(42 24 16 / 0.2);
+
+  /* Motion — the built-in curves are too weak to read as intentional */
+  --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
+  --ease-in-out: cubic-bezier(0.77, 0, 0.175, 1);
 }
 
-html {
-  scroll-behavior: smooth;
-}
-
-@media (prefers-reduced-motion: reduce) {
+@media (prefers-reduced-motion: no-preference) {
   html {
-    scroll-behavior: auto;
+    scroll-behavior: smooth;
   }
 }
 
@@ -58,29 +57,48 @@ body {
   background-color: rgb(224 27 34 / 0.14);
 }
 
+/* Outline follows each element's own radius — never override it here. */
 :focus-visible {
   outline: 2px solid var(--color-brand-red);
   outline-offset: 3px;
-  border-radius: 2px;
+}
+
+/* On dark or brand-red plates a red ring disappears — switch to cream */
+.on-dark :focus-visible,
+.on-dark:focus-visible {
+  outline-color: var(--color-cream);
+}
+
+/* Form fields: keep the native ring, tint it to the brand */
+.field {
+  transition:
+    border-color 160ms var(--ease-out),
+    box-shadow 160ms var(--ease-out);
+}
+.field:focus-visible {
+  outline: none;
+  border-color: var(--color-cocoa);
+  box-shadow: 0 0 0 3px rgb(224 27 34 / 0.18);
+}
+
+/* Pressable elements confirm the press before anything else responds */
+.press {
+  transition: transform 160ms var(--ease-out);
+}
+.press:active {
+  transform: scale(0.97);
+}
+@media (prefers-reduced-motion: reduce) {
+  .press:active {
+    transform: none;
+  }
 }
 
 /* Display serif headings get tight, confident tracking */
 .font-display {
-  letter-spacing: -0.015em;
+  letter-spacing: -0.022em;
   font-optical-sizing: auto;
-}
-
-/* Thin gold rule used between editorial sections */
-.rule-gold {
-  height: 1px;
-  background: linear-gradient(
-    to right,
-    transparent,
-    var(--color-brand-gold) 18%,
-    var(--color-brand-gold) 82%,
-    transparent
-  );
-  opacity: 0.55;
+  text-wrap: balance;
 }
 
 /* Hide scrollbars on snap carousels while keeping them scrollable */
@@ -126,20 +144,11 @@ body {
   color: transparent;
 }
 
-/* Print-like grain over rich colour fields — overlays the whole plate at 5%,
-   never repositions children (pointer-events: none keeps it inert). */
-.grain {
-  position: relative;
+/* Rich colour field that owns its own stacking context, so watermarks and
+   floating garnish layer inside it without escaping. Positioning stays with
+   the utilities — setting it here would silently beat `sticky`. */
+.plate {
   isolation: isolate;
-}
-.grain::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  z-index: 50;
-  pointer-events: none;
-  opacity: 0.05;
-  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23n)'/%3E%3C/svg%3E");
 }
 
 /* Slow brand ribbon marquee */
@@ -169,6 +178,70 @@ body {
   animation: float-bob 7s ease-in-out infinite;
 }
 
+/* Hero scroll-down cue — a chocolate chunk tumbling down a hairline track */
+@keyframes scroll-cue {
+  0% {
+    transform: translate(-50%, 0) rotate(0deg);
+    opacity: 0;
+  }
+  18% {
+    opacity: 1;
+  }
+  70% {
+    opacity: 1;
+  }
+  100% {
+    transform: translate(-50%, 2.6rem) rotate(150deg);
+    opacity: 0;
+  }
+}
+.scroll-cue-dot {
+  animation: scroll-cue 2s ease-in-out infinite;
+}
+
+/* Primary nav underline that grows in from the left */
+.nav-link {
+  position: relative;
+}
+.nav-link::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -5px;
+  height: 2px;
+  border-radius: 999px;
+  background: currentColor;
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.25s ease;
+}
+.nav-link:hover::after,
+.nav-link[aria-current="page"]::after {
+  transform: scaleX(1);
+}
+@media (prefers-reduced-motion: reduce) {
+  .nav-link::after {
+    transition: none;
+  }
+}
+
+/* Mobile menu drops in from under the header rather than snapping open */
+@keyframes menu-drop {
+  from {
+    opacity: 0;
+    transform: translateY(-8px);
+  }
+}
+.menu-open {
+  animation: menu-drop 220ms var(--ease-out);
+}
+@media (prefers-reduced-motion: reduce) {
+  .menu-open {
+    animation: none;
+  }
+}
+
 /* Route-loading dots */
 @keyframes loader-bounce {
   0%,
@@ -189,7 +262,8 @@ body {
 @media (prefers-reduced-motion: reduce) {
   .ribbon-track,
   .float-bob,
-  .loader-dot {
+  .loader-dot,
+  .scroll-cue-dot {
     animation: none;
   }
 }

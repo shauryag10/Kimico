@@ -194,11 +194,7 @@ export default function BrandsPage() {
   return (
     <div>
       <header className="mx-auto max-w-[90rem] px-5 pb-16 pt-14 sm:px-10 lg:pt-20">
-        <p className="flex items-center gap-4 text-[0.7rem] font-semibold uppercase tracking-[0.34em] text-brand-gold sm:text-xs">
-          <span aria-hidden="true" className="h-px w-10 bg-brand-gold" />
-          The brand book
-        </p>
-        <h1 className="display-soft mt-4 max-w-4xl font-display text-5xl font-semibold leading-[1.0] text-cocoa sm:text-7xl">
+        <h1 className="display-soft max-w-4xl font-display text-5xl font-semibold leading-[1.0] text-cocoa sm:text-7xl">
           Nine names on the <em className="display-wonk italic text-brand-red">wrapper</em>
         </h1>
         <p className="mt-6 max-w-xl text-base leading-relaxed text-ink-soft sm:text-lg">
@@ -213,7 +209,9 @@ export default function BrandsPage() {
           <Reveal key={s.name}>
             <section
               aria-labelledby={`brand-${i}`}
-              className={`grain relative mx-auto max-w-[90rem] overflow-hidden rounded-[2.5rem] ${s.plate} shadow-card`}
+              className={`plate relative mx-auto max-w-[90rem] overflow-hidden rounded-[2.5rem] ${s.plate} shadow-card ${
+                s.text === "text-cocoa" ? "" : "on-dark"
+              }`}
             >
               <span
                 aria-hidden="true"
@@ -228,7 +226,7 @@ export default function BrandsPage() {
               >
                 <div className={i % 2 ? "lg:order-2" : ""}>
                   <p className={`text-[0.7rem] font-bold uppercase tracking-[0.3em] ${s.kickerColor}`}>
-                    {String(i + 1).padStart(2, "0")} · {s.kicker}
+                    {s.kicker}
                   </p>
                   <h2
                     id={`brand-${i}`}
@@ -247,7 +245,7 @@ export default function BrandsPage() {
                   </p>
                   <Link
                     href={s.href}
-                    className={`group mt-8 inline-flex items-center gap-3 rounded-full border-2 px-6 py-3 text-sm font-semibold transition-colors ${
+                    className={`press group mt-8 inline-flex items-center gap-3 rounded-full border-2 px-6 py-3 text-sm font-semibold transition-[transform,background-color,color,border-color] ${
                       s.text === "text-cocoa"
                         ? "border-cocoa/40 text-cocoa hover:bg-cocoa hover:text-cream"
                         : "border-white/40 text-white hover:bg-white hover:text-cocoa"

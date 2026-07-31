@@ -1,5 +1,6 @@
 "use client";
 
+import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useCallback, useMemo, useState } from "react";
 import ProductCard from "@/components/ProductCard";
@@ -33,7 +34,7 @@ function Pill({
       type="button"
       onClick={onClick}
       aria-pressed={active}
-      className={`inline-flex shrink-0 items-center gap-2 rounded-full border px-4 py-2 text-sm font-medium transition-colors ${
+      className={`press inline-flex shrink-0 items-center gap-2 rounded-full border px-4 py-2 text-sm font-medium transition-[transform,background-color,border-color,color] ${
         active
           ? "border-cocoa bg-cocoa text-cream"
           : "border-cocoa/20 bg-white/70 text-cocoa hover:border-cocoa/50"
@@ -60,6 +61,7 @@ export default function CatalogueExplorer({
 }) {
   const router = useRouter();
   const searchParams = useSearchParams();
+  const reduce = useReducedMotion();
   const [filters, setFilters] = useState<Filters>(initial);
 
   const apply = useCallback(
@@ -114,7 +116,7 @@ export default function CatalogueExplorer({
                 value={filters.q}
                 onChange={(e) => apply({ q: e.target.value })}
                 placeholder="Search name or item code…"
-                className="w-full rounded-full border border-cocoa/20 bg-white py-2.5 pl-11 pr-4 text-sm text-ink placeholder:text-ink-soft/70 focus:border-cocoa focus:outline-none"
+                className="field w-full rounded-full border border-cocoa/20 bg-white py-2.5 pl-11 pr-4 text-sm text-ink placeholder:text-ink-soft/70"
               />
             </label>
             <p className="text-sm font-medium text-ink-soft" aria-live="polite">
@@ -192,18 +194,27 @@ export default function CatalogueExplorer({
             <button
               type="button"
               onClick={() => apply({ category: "", brand: "", format: "", q: "" })}
-              className="mt-8 rounded-full bg-cocoa px-7 py-3 text-sm font-semibold text-cream transition-colors hover:bg-brand-red"
+              className="press mt-8 rounded-full bg-cocoa px-7 py-3 text-sm font-semibold text-cream transition-[transform,background-color] hover:bg-brand-red"
             >
               Show all {products.length} products
             </button>
           </div>
         ) : (
           <ul className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-            {visible.map((p) => (
-              <li key={p.code}>
-                <ProductCard product={p} />
-              </li>
-            ))}
+            <AnimatePresence mode="popLayout" initial={false}>
+              {visible.map((p) => (
+                <motion.li
+                  key={p.code}
+                  layout={!reduce}
+                  initial={reduce ? false : { opacity: 0, scale: 0.94 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  exit={reduce ? undefined : { opacity: 0, scale: 0.94 }}
+                  transition={{ duration: 0.28, ease: [0.22, 0.61, 0.36, 1] }}
+                >
+                  <ProductCard product={p} />
+                </motion.li>
+              ))}
+            </AnimatePresence>
           </ul>
         )}
       </div>

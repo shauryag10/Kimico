@@ -37,8 +37,15 @@ export default function Preloader() {
           role="status"
           data-preloader
           aria-label="Loading Kimico Foods"
-          exit={{ opacity: 0, transition: { duration: 0.45, ease: "easeInOut" } }}
-          className="fixed inset-0 z-[200] grid place-items-center bg-cream"
+          exit={
+            reduce
+              ? { opacity: 0, transition: { duration: 0.3 } }
+              : {
+                  y: "-100%",
+                  transition: { duration: 0.55, ease: [0.65, 0, 0.35, 1] },
+                }
+          }
+          className="fixed inset-0 z-[200] grid place-items-center bg-cream shadow-[0_30px_60px_rgba(42,24,16,0.25)]"
         >
           <div className="flex flex-col items-center">
             <motion.div
