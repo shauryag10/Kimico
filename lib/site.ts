@@ -1,8 +1,11 @@
 /** Site-wide constants. */
 
-// TODO: replace with the production domain before go-live (used for
-// canonical URLs, OpenGraph tags and the sitemap).
-export const SITE_URL = "https://kimicofoods.example.com";
+// Canonical origin — feeds canonical URLs, OpenGraph tags and the sitemap.
+// When a custom domain is added, set NEXT_PUBLIC_SITE_URL in the Vercel
+// project settings (Settings -> Environment Variables) and redeploy; no code
+// change needed. Falls back to the current production deployment.
+export const SITE_URL =
+  process.env.NEXT_PUBLIC_SITE_URL ?? "https://kimico-foods.vercel.app";
 
 export const COMPANY = {
   name: "Kimico Foods",

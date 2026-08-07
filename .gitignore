@@ -30,3 +30,6 @@ next-env.d.ts
 
 # source material (not deployed; web copy lives in /public/catalogue)
 /Kimico Retail Catalogue.pdf
+
+.vercel
+.env*

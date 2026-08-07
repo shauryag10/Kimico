@@ -16,9 +16,17 @@ npm run lint       # eslint
 
 Deploys to Vercel with zero configuration — import the repo and press deploy.
 
-Before go-live, set the production domain in [`lib/site.ts`](lib/site.ts)
-(`SITE_URL`) — it feeds canonical URLs, OpenGraph tags, JSON-LD and the
-sitemap.
+Live at **https://kimico-foods.vercel.app**. The Vercel project is connected to
+this GitHub repo, so every push to `main` deploys automatically.
+
+The canonical origin (`SITE_URL` in [`lib/site.ts`](lib/site.ts)) feeds
+canonical URLs, OpenGraph tags, JSON-LD and the sitemap. It defaults to the
+Vercel URL; when a custom domain is added, set `NEXT_PUBLIC_SITE_URL` in the
+Vercel project's environment variables and redeploy — no code change needed.
+
+Note `.vercelignore` keeps the 115MB source catalogue out of deployments (it
+exceeds Vercel's 100MB per-file limit); the 6MB web copy the site serves from
+`public/catalogue/` is deployed normally.
 
 ## Editing products
 

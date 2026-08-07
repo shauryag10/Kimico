@@ -1,0 +1,14 @@
+# Source material — 115MB, exceeds Vercel's 100MB file limit.
+# The optimised web copy that the site actually serves lives in
+# /public/catalogue/kimico-retail-catalogue.pdf and IS deployed.
+# Root-anchored so it never matches anything under /public.
+/*.pdf
+
+# Dev-only tooling, not needed at runtime
+/scripts
+/.claude
+
+# Rebuilt on Vercel
+/node_modules
+/.next
+/.git
