@@ -7,7 +7,7 @@ import { publicProducts } from "@/lib/catalog";
 export const metadata: Metadata = {
   title: "Products",
   description:
-    "Browse the full Kimico Foods range — 49 products across chocolates, truffles, toffees, eclairs, jellies, jars and novelty candy. Filter by range, brand and pack format.",
+    `Browse the full Kimico Foods range — ${publicProducts.length} products across chocolates, truffles, toffees, eclairs, jellies and jars, with MRP on every pack. Filter by brand and pack format.`,
 };
 
 type SearchParams = Promise<Record<string, string | string[] | undefined>>;
@@ -37,9 +37,9 @@ export default async function ProductsPage({
             Every sweet thing<span className="text-brand-red">.</span>
           </h1>
           <p className="mt-5 max-w-xl text-base leading-relaxed text-ink-soft sm:text-lg">
-            All {publicProducts.length} products under the Kimico, Kimmy and JK
-            Toys marks. Filter by range, brand or pack format — pricing is
-            shared on request for every item.
+            All {publicProducts.length} products under the Kimico and Kimmy marks,
+            with MRP on every pack. Filter by brand or pack format — trade
+            pricing on request.
           </p>
         </Reveal>
       </header>

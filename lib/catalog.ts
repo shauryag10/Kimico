@@ -1,15 +1,13 @@
 import { products, type Category, type Product } from "@/data/products";
 
 /**
- * Product shape that is safe to send to the browser.
- * `priceInr` is internal-only and is stripped by `toPublic` on the server.
+ * Every product field is public. `priceInr` is the pack MRP — the printed
+ * consumer price — and is shown on cards and detail pages.
  */
-export type PublicProduct = Omit<Product, "priceInr">;
+export type PublicProduct = Product;
 
 export function toPublic(p: Product): PublicProduct {
-  const { priceInr: _internal, ...safe } = p;
-  void _internal;
-  return safe;
+  return p;
 }
 
 export const publicProducts: PublicProduct[] = products.map(toPublic);
@@ -96,7 +94,7 @@ export const CATEGORY_META: CategoryMeta[] = [
     slug: "kids-novelty",
     short: "Kids",
     blurb: "Toy-candy crossovers — blooming pops, toothbrush candy and more.",
-    image: "/products/km-49.webp",
+    image: "/products/km-26.webp",
     accentText: "text-cat-kids",
     accentBg: "bg-cat-kids",
     tintBg: "bg-cat-kids-tint",
@@ -105,7 +103,9 @@ export const CATEGORY_META: CategoryMeta[] = [
   },
 ];
 
-export const BRANDS = ["Kimico", "Kimmy", "JK Toys"] as const;
+// Brands with products in the range today. JK Toys stays in the Product
+// type for when its lines return.
+export const BRANDS = ["Kimico", "Kimmy"] as const;
 export const FORMATS = [
   "Pouch",
   "Jar",

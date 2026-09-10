@@ -3,9 +3,9 @@
 // Canonical origin — feeds canonical URLs, OpenGraph tags and the sitemap.
 // When a custom domain is added, set NEXT_PUBLIC_SITE_URL in the Vercel
 // project settings (Settings -> Environment Variables) and redeploy; no code
-// change needed. Falls back to the current production deployment.
+// change needed. Falls back to the live domain.
 export const SITE_URL =
-  process.env.NEXT_PUBLIC_SITE_URL ?? "https://kimico-foods.vercel.app";
+  process.env.NEXT_PUBLIC_SITE_URL ?? "https://kimicoglobal.com";
 
 export const COMPANY = {
   name: "Kimico Foods",

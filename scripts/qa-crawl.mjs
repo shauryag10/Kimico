@@ -1,6 +1,6 @@
 /* QA crawl of the production build:
    - every route returns 200 and renders
-   - the rupee sign never appears in the DOM (prices are internal-only)
+   - MRP (₹) renders on catalogue and product pages
    - no broken images, no product image without alt text
    - URL-driven catalogue filters return the expected counts */
 import puppeteer from "puppeteer-core";
@@ -28,9 +28,9 @@ const routes = [
 
 const FILTER_CASES = [
   { url: "/products?category=jars-bulk", expected: 12 },
-  { url: "/products?brand=JK+Toys", expected: 1 },
+  { url: "/products?brand=Kimmy", expected: 21 },
   { url: "/products?format=Jar", expected: 10 },
-  { url: "/products?q=eclairs", expected: 6 },
+  { url: "/products?q=eclairs", expected: 7 },
   { url: "/products?category=truffles-gifting&brand=Kimmy", expected: 3 },
 ];
 
@@ -69,7 +69,7 @@ for (const route of routes) {
       .map((i) => i.currentSrc.slice(-60));
     return { rupee, broken, missingAlt };
   });
-  if (audit.rupee) failures.push(`${route}: rupee sign rendered`);
+  if (route.startsWith("/products") && !audit.rupee) failures.push(`${route}: MRP not rendered`);
   for (const b of audit.broken) failures.push(`${route}: broken image ${b}`);
   for (const m of audit.missingAlt) failures.push(`${route}: product image missing alt ${m}`);
   checked++;
@@ -93,4 +93,4 @@ if (failures.length) {
   for (const f of failures) console.log(" -", f);
   process.exit(1);
 }
-console.log("ALL CLEAN: no rupee signs, no broken images, no missing alts, filters correct");
+console.log("ALL CLEAN: MRP rendered, no broken images, no missing alts, filters correct");

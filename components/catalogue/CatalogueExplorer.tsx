@@ -80,6 +80,8 @@ export default function CatalogueExplorer({
     [filters, router, searchParams],
   );
 
+  const activeCategory = CATEGORY_META.find((c) => c.slug === filters.category);
+
   const visible = useMemo(() => {
     const q = filters.q.trim().toLowerCase();
     const cat = CATEGORY_META.find((c) => c.slug === filters.category)?.name;
@@ -122,6 +124,22 @@ export default function CatalogueExplorer({
             <p className="text-sm font-medium text-ink-soft" aria-live="polite">
               {visible.length} of {products.length} products
             </p>
+            {activeCategory && (
+              <button
+                type="button"
+                onClick={() => apply({ category: "" })}
+                aria-label={`Showing ${activeCategory.name} — show all ranges`}
+                className="press inline-flex items-center gap-2 rounded-full bg-cocoa px-3.5 py-1.5 text-xs font-semibold text-cream transition-[transform,background-color] hover:bg-brand-red"
+              >
+                <span
+                  aria-hidden="true"
+                  className="h-2 w-2 rounded-full"
+                  style={{ backgroundColor: activeCategory.accent }}
+                />
+                {activeCategory.name}
+                <span aria-hidden="true">×</span>
+              </button>
+            )}
             {(filters.category || filters.brand || filters.format || filters.q) && (
               <button
                 type="button"
@@ -134,24 +152,6 @@ export default function CatalogueExplorer({
           </div>
 
           <div className="no-scrollbar mt-3 flex gap-2 overflow-x-auto pb-1">
-            <Pill active={!filters.category} onClick={() => apply({ category: "" })}>
-              All ranges
-            </Pill>
-            {CATEGORY_META.map((c) => (
-              <Pill
-                key={c.slug}
-                active={filters.category === c.slug}
-                onClick={() =>
-                  apply({ category: filters.category === c.slug ? "" : c.slug })
-                }
-                dot={c.accent}
-              >
-                {c.name}
-              </Pill>
-            ))}
-          </div>
-
-          <div className="no-scrollbar mt-2 flex gap-2 overflow-x-auto pb-1">
             <span className="mr-1 self-center text-[0.65rem] font-bold uppercase tracking-[0.2em] text-ink-soft">
               Brand
             </span>

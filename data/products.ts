@@ -5,8 +5,11 @@
  * Edit names, descriptions, flavours and pack specs here; the catalogue,
  * product pages, filters and sitemap all read from this list.
  *
- * IMPORTANT: `priceInr` is for internal reference only. It is stripped on the
- * server before data reaches the browser and must NEVER be rendered anywhere.
+ * `priceInr` is the pack MRP (printed on the pack, inclusive of all taxes)
+ * and is shown on cards and detail pages. Leave it undefined where the
+ * catalogue lists no price. `image` may be omitted for a SKU awaiting
+ * photography — the site renders a typographic placeholder until the file
+ * lands in /public/products.
  */
 
 export type Category =
@@ -37,8 +40,10 @@ export type Product = {
   piecesPerPack?: number;
   weight?: string; // "750 gms", "180 gms/tin"
   unitsPerCarton?: string; // "12 bags/carton" — undefined where the catalogue lists none
-  priceInr?: number; // INTERNAL ONLY — never rendered in the UI
-  image: string; // "/products/km-01.webp"
+  priceInr?: number; // MRP in rupees, as printed on the pack
+  image?: string; // "/products/km-01.webp" — omit until photography exists
+  contents?: string[]; // for assortments: the packs inside
+  palmOilFree?: boolean; // only where the pack states it
 };
 
 export const products: Product[] = [
@@ -116,21 +121,6 @@ export const products: Product[] = [
     unitsPerCarton: '24 units/carton',
     priceInr: 200,
     image: '/products/km-05.webp',
-  },
-  {
-    code: 'KM-06',
-    slug: 'wonderbar-container',
-    name: 'Wonderbar Container',
-    brand: 'Kimico',
-    category: 'Chocolates & Bars',
-    format: 'Container',
-    description:
-      'Both Wonderbars — strawberry and vanilla — in resealable counter tubs of forty, built to sit beside the till.',
-    flavours: ['Strawberry', 'Vanilla'],
-    piecesPerPack: 40,
-    unitsPerCarton: '24 containers/carton',
-    priceInr: 200,
-    image: '/products/km-06.webp',
   },
   {
     code: 'KM-07',
@@ -287,7 +277,16 @@ export const products: Product[] = [
     category: 'Jars & Bulk Packs',
     format: 'Pack',
     description:
-      'An assortment of small packs from across the Kimico and Kimmy families — eclairs, dry-fruit toffees, chews and more in one trade-friendly bundle.',
+      'Seven small packs in one trade bundle — Milky Eclairs, four Kimmy dry-fruit toffees, Cow Milk Bites and KitKit.',
+    contents: [
+      'Milky Eclairs',
+      'Almond Toffee',
+      'Dates Toffee',
+      'Cashew Toffee',
+      'Anjeer Toffee',
+      'Cow Milk Bites',
+      'KitKit',
+    ],
     piecesPerPack: 50,
     unitsPerCarton: '60 packs/carton',
     priceInr: 50,
@@ -307,21 +306,6 @@ export const products: Product[] = [
     unitsPerCarton: '15 boxes/carton',
     priceInr: 350,
     image: '/products/km-18.webp',
-  },
-  {
-    code: 'KM-19',
-    slug: 'truffles-handled-box',
-    name: 'Truffles Handled Box',
-    brand: 'Kimico',
-    category: 'Truffles & Gifting',
-    format: 'Box',
-    description:
-      'The truffle counter pack with a carry handle — twenty pieces of a single flavour, six flavours to line up in a row.',
-    flavours: ['Strawberry', 'Orange', 'Raspberry', 'Mint', 'Peanut Butter', 'Coconut'],
-    piecesPerPack: 20,
-    unitsPerCarton: '36 boxes/carton',
-    priceInr: 130,
-    image: '/products/km-19.webp',
   },
   {
     code: 'KM-20',
@@ -396,21 +380,6 @@ export const products: Product[] = [
     image: '/products/km-24.webp',
   },
   {
-    code: 'KM-25',
-    slug: 'milky-magic',
-    name: 'Milky Magic — Creamy White Chocolate Bar',
-    brand: 'Kimico',
-    category: 'Chocolates & Bars',
-    format: 'Display Box',
-    description:
-      'Creamy white chocolate with an alpine amount of milk — a bright yellow bar kids can spot from across the shop.',
-    flavours: ['Creamy White Chocolate'],
-    piecesPerPack: 30,
-    unitsPerCarton: '24 boxes/carton',
-    priceInr: 150,
-    image: '/products/km-25.webp',
-  },
-  {
     code: 'KM-26',
     slug: 'free-fire-chocolate',
     name: 'Free Fire — Gun & Sword Shaped Chocolate',
@@ -441,30 +410,6 @@ export const products: Product[] = [
     image: '/products/km-27.webp',
   },
   {
-    code: 'KM-28',
-    slug: 'tube-jelly',
-    name: 'Tube Jelly',
-    brand: 'Kimico',
-    category: 'Jellies & Fun',
-    format: 'Display Box',
-    description:
-      'Squeeze-up jelly tubes in Spinto, Cola and Fantup — everyone’s favourite fizzy-drink flavours, minus the fizz.',
-    flavours: ['Spinto', 'Cola', 'Fantup'],
-    image: '/products/km-28.webp',
-  },
-  {
-    code: 'KM-29',
-    slug: 'dairy-lips-spread',
-    name: 'Dairy Lips Creamy Spread',
-    brand: 'Kimico',
-    category: 'Kids & Novelty',
-    format: 'Display Box',
-    description:
-      'A creamy spread in berry, choco and mango, sized for one very happy sitting — no toast required.',
-    flavours: ['Berry', 'Choco', 'Mango'],
-    image: '/products/km-29.webp',
-  },
-  {
     code: 'KM-30',
     slug: 'luxury-selections-gift-packs',
     name: 'Luxury Selections Gift Packs',
@@ -478,21 +423,6 @@ export const products: Product[] = [
     unitsPerCarton: '20 packs/carton',
     priceInr: 250,
     image: '/products/km-30.webp',
-  },
-  {
-    code: 'KM-31',
-    slug: 'luxury-selections-gift-boxes',
-    name: 'Luxury Selections Gift Boxes',
-    brand: 'Kimico',
-    category: 'Truffles & Gifting',
-    format: 'Box',
-    description:
-      'The same six Luxury Selections, upgraded to windowed gift boxes with carry handles — made for festival season.',
-    flavours: ['Chocolaty', 'Honey', 'Milkies', 'Dry Fruits', 'Caramello', 'Treats'],
-    piecesPerPack: 50,
-    unitsPerCarton: '30 boxes/carton',
-    priceInr: 125,
-    image: '/products/km-31.webp',
   },
   {
     code: 'KM-32',
@@ -535,7 +465,7 @@ export const products: Product[] = [
       'Bright red, milky-sweet and wrapped to twinkle in the jar — Pick-Me toffees do exactly what the name asks.',
     flavours: ['Milky Toffee'],
     piecesPerPack: 100,
-    unitsPerCarton: '36 packs/carton',
+    unitsPerCarton: '40 packs/carton',
     priceInr: 100,
     image: '/products/km-34.webp',
   },
@@ -748,40 +678,88 @@ export const products: Product[] = [
     image: '/products/km-47.webp',
   },
   {
-    code: 'KM-48',
-    slug: 'toffee-bar-containers',
-    name: 'Toffee Bar Containers',
-    brand: 'Kimmy',
+    code: 'KM-50',
+    slug: 'velvets-truffle-chocolate-box',
+    name: 'Velvets Truffle Chocolate — Box',
+    brand: 'Kimico',
+    category: 'Truffles & Gifting',
+    format: 'Display Box',
+    description:
+      'Smooth, creamy truffle enrobed in rich milk chocolate — six flavours from mango to pistachio, boxed thirty at a time for the counter.',
+    flavours: ['Mango', 'Coconut', 'Caramel', 'Pistachio', 'Strawberry', 'Orange'],
+    piecesPerPack: 30,
+    unitsPerCarton: '24 boxes/carton',
+    priceInr: 150,
+  },
+  {
+    code: 'KM-51',
+    slug: 'poland-cream-fudge-tub',
+    name: 'Poland Cream Fudge Tub',
+    brand: 'Kimico',
     category: 'Jars & Bulk Packs',
     format: 'Container',
     description:
-      'Six toffee-bar tubs — Mango Doubles, Eldöre, Milko, Doodh Malai, Pick-Me and Happy Birthday — ready to line a shelf in colour order.',
-    flavours: [
-      'Mango Doubles',
-      'Eldöre',
-      'Milko',
-      'Doodh Malai',
-      'Pick-Me',
-      'Happy Birthday',
-    ],
-    piecesPerPack: 150,
+      'Creamy, chewy, buttery Poland cream fudge in a resealable fifty-piece tub — and made without palm oil.',
+    flavours: ['Cream Fudge'],
+    piecesPerPack: 50,
     unitsPerCarton: '16 containers/carton',
-    priceInr: 150,
-    image: '/products/km-48.webp',
+    priceInr: 300,
+    palmOilFree: true,
   },
   {
-    code: 'KM-49',
-    slug: 'i-love-you-pop',
-    name: 'I Love You Pop',
-    brand: 'JK Toys',
-    category: 'Kids & Novelty',
-    format: 'Display Box',
+    code: 'KM-52',
+    slug: 'rich-cube',
+    name: 'Rich Cube — Milk Chocolate with Creamy Cocoa Centre',
+    brand: 'Kimico',
+    category: 'Chocolates & Bars',
+    format: 'Box',
     description:
-      'A rose that blooms open to reveal a lollipop — JK Toys’ show-stopping way to say it. Show your love.',
-    flavours: ['Strawberry Pop'],
+      'A milk chocolate cube that gives way to a creamy cocoa centre. Seventy individually wrapped pieces to a box — make every moment rich.',
+    flavours: ['Milk Chocolate · Cocoa Centre'],
+    piecesPerPack: 70,
+    unitsPerCarton: '12 boxes/carton',
+    priceInr: 350,
+  },
+  {
+    code: 'KM-53',
+    slug: 'velvets-truffle-chocolate-container',
+    name: 'Velvets Truffle Chocolate — Container',
+    brand: 'Kimico',
+    category: 'Truffles & Gifting',
+    format: 'Container',
+    description:
+      'The same six Velvets truffles in a resealable thirty-piece container that sits beside the till — velvety smooth, irresistibly indulgent.',
+    flavours: ['Mango', 'Coconut', 'Caramel', 'Pistachio', 'Strawberry', 'Orange'],
     piecesPerPack: 30,
-    unitsPerCarton: '24 boxes/carton',
-    priceInr: 450,
-    image: '/products/km-49.webp',
+    unitsPerCarton: '24 containers/carton',
+    priceInr: 150,
+  },
+  {
+    code: 'KM-54',
+    slug: 'kokonata-coconut-toffees',
+    name: 'Kokonata — Rich Coconut Toffees',
+    brand: 'Kimmy',
+    category: 'Toffees & Eclairs',
+    format: 'Pouch',
+    description:
+      'Soft, creamy toffees made with real coconut — Kimmy’s seaside classic in a hundred-piece pouch.',
+    flavours: ['Coconut'],
+    piecesPerPack: 100,
+    unitsPerCarton: '40 packs/carton',
+    priceInr: 100,
+  },
+  {
+    code: 'KM-55',
+    slug: 'milky-eclairs-tattoo-pouch',
+    name: 'Milky Eclairs — Free Tattoo Inside',
+    brand: 'Kimico',
+    category: 'Toffees & Eclairs',
+    format: 'Pouch',
+    description:
+      'Soft, yummy caramel with a rich milky centre — now tastier and bigger, with a free tattoo inside every eclair.',
+    flavours: ['Milky Caramel'],
+    piecesPerPack: 100,
+    unitsPerCarton: '32 packets/carton',
+    priceInr: 100,
   },
 ];

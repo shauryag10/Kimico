@@ -14,7 +14,7 @@ type BrandSection = {
   kicker: string;
   story: [string, string];
   meta: string;
-  image: string;
+  image?: string; // omit until photography exists
   alt: string;
   href: string;
   cta: string;
@@ -52,8 +52,8 @@ const SECTIONS: BrandSection[] = [
       "Boxed for the counter or carried home by the handle, Truffles is proof that the smallest presents are opened fastest.",
     ],
     meta: "Creme-filled cacao truffles · Six flavours · Boxes and handled packs",
-    image: "/products/km-19.webp",
-    alt: "Kimico Truffles handled boxes in six flavours",
+    image: "/products/km-18.webp",
+    alt: "Kimico Truffles boxes in six flavours",
     href: "/products?q=truffles",
     cta: "Unwrap the Truffles range",
     plate: "bg-[linear-gradient(155deg,#6b3f1d,#341c0c)]",
@@ -188,6 +188,57 @@ const SECTIONS: BrandSection[] = [
     kickerColor: "text-[#7c5d0e]",
     initial: "C",
   },
+  {
+    name: "Velvets",
+    kicker: "Velvety smooth, irresistibly indulgent",
+    story: [
+      "Smooth, creamy truffle enrobed in rich milk chocolate — six exquisite flavours, one delicious experience. Mango, coconut, caramel, pistachio, strawberry and orange, each in its own pastel wrap.",
+      "Thirty pieces to a box or a resealable container, Velvets is the newest Kimico range and already the one the counter reaches for first.",
+    ],
+    meta: "Truffle chocolate · Six flavours · 30-piece boxes and containers",
+    alt: "Velvets truffle chocolate containers in six flavours",
+    href: "/products?q=velvets",
+    cta: "Meet the Velvets range",
+    plate: "bg-[linear-gradient(155deg,#f7e4d6,#e7c3b1)]",
+    text: "text-cocoa",
+    sub: "text-cocoa/75",
+    kickerColor: "text-[#a0522d]",
+    initial: "V",
+  },
+  {
+    name: "Rich Cube",
+    kicker: "Make every moment rich",
+    story: [
+      "A milk chocolate cube that gives way to a creamy cocoa centre. Seventy pieces to a box, each one individually wrapped in deep purple and gold.",
+      "Rich Cube is built for the moments in between — the desk drawer, the glovebox, the top of the fridge.",
+    ],
+    meta: "Milk chocolate · Creamy cocoa centre · 70-piece boxes",
+    alt: "Rich Cube milk chocolate box",
+    href: "/products?q=rich+cube",
+    cta: "Open a box of Rich Cube",
+    plate: "bg-[linear-gradient(155deg,#4b2c7a,#2a1747)]",
+    text: "text-white",
+    sub: "text-white/75",
+    kickerColor: "text-[#e8c66a]",
+    initial: "R",
+  },
+  {
+    name: "Kokonata",
+    kicker: "Made with real coconut goodness",
+    story: [
+      "Kimmy’s rich coconut toffees — soft, creamy and unmistakably coconut, made with real coconut and wrapped in a wave of white and blue.",
+      "A hundred to the pouch, forty pouches to the carton: Kokonata is the seaside classic, sized for the shelf.",
+    ],
+    meta: "Rich coconut toffees · Soft & creamy · 100-piece pouches",
+    alt: "Kokonata rich coconut toffees pouch and carton",
+    href: "/products?q=kokonata",
+    cta: "Crack open Kokonata",
+    plate: "bg-[linear-gradient(155deg,#c9e6f5,#74b9dd)]",
+    text: "text-cocoa",
+    sub: "text-cocoa/75",
+    kickerColor: "text-[#1d5f8a]",
+    initial: "K",
+  },
 ];
 
 export default function BrandsPage() {
@@ -195,7 +246,7 @@ export default function BrandsPage() {
     <div>
       <header className="mx-auto max-w-[90rem] px-5 pb-16 pt-14 sm:px-10 lg:pt-20">
         <h1 className="display-soft max-w-4xl font-display text-5xl font-semibold leading-[1.0] text-cocoa sm:text-7xl">
-          Nine names on the <em className="display-wonk italic text-brand-red">wrapper</em>
+          Twelve names on the <em className="display-wonk italic text-brand-red">wrapper</em>
         </h1>
         <p className="mt-6 max-w-xl text-base leading-relaxed text-ink-soft sm:text-lg">
           Under KIMICO and KIMMY live the ranges people actually ask for by
@@ -258,14 +309,25 @@ export default function BrandsPage() {
                   </Link>
                 </div>
                 <div className={`flex items-center justify-center ${i % 2 ? "lg:order-1" : ""}`}>
-                  <Image
-                    src={s.image}
-                    alt={s.alt}
-                    width={1000}
-                    height={760}
-                    sizes="(min-width: 1024px) 40vw, 88vw"
-                    className="max-h-[20rem] w-auto max-w-full object-contain drop-shadow-[0_34px_38px_rgba(0,0,0,0.4)] sm:max-h-[24rem]"
-                  />
+                  {s.image ? (
+                    <Image
+                      src={s.image}
+                      alt={s.alt}
+                      width={1000}
+                      height={760}
+                      sizes="(min-width: 1024px) 40vw, 88vw"
+                      className="max-h-[20rem] w-auto max-w-full object-contain drop-shadow-[0_34px_38px_rgba(0,0,0,0.4)] sm:max-h-[24rem]"
+                    />
+                  ) : (
+                    <div
+                      aria-hidden="true"
+                      className="flex aspect-[4/3] w-full max-w-md items-center justify-center rounded-[2rem] border border-current/20 p-8 text-center"
+                    >
+                      <span className={`display-soft font-display text-5xl font-semibold sm:text-6xl ${s.text}`}>
+                        {s.name}
+                      </span>
+                    </div>
+                  )}
                 </div>
               </div>
             </section>

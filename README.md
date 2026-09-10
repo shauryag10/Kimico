@@ -16,7 +16,7 @@ npm run lint       # eslint
 
 Deploys to Vercel with zero configuration — import the repo and press deploy.
 
-Live at **https://kimico-foods.vercel.app**. The Vercel project is connected to
+Live at **https://kimicoglobal.com**. The Vercel project is connected to
 this GitHub repo, so every push to `main` deploys automatically.
 
 The canonical origin (`SITE_URL` in [`lib/site.ts`](lib/site.ts)) feeds
@@ -30,7 +30,7 @@ exceeds Vercel's 100MB per-file limit); the 6MB web copy the site serves from
 
 ## Editing products
 
-All 49 SKUs live in one typed file: [`data/products.ts`](data/products.ts).
+Every SKU lives in one typed file: [`data/products.ts`](data/products.ts).
 Each entry looks like:
 
 ```ts
@@ -46,15 +46,20 @@ Each entry looks like:
   piecesPerPack: 70,          // optional
   weight: "750 gms",          // optional — used when pieces don't apply
   unitsPerCarton: "15 boxes/carton", // optional
-  priceInr: 350,              // INTERNAL ONLY — never rendered, see below
-  image: "/products/km-18.webp",
+  priceInr: 350,              // MRP in rupees — shown on the site
+  image: "/products/km-18.webp", // omit until the photo exists (see below)
+  palmOilFree: true,          // optional — only where the pack states it
+  contents: ["…"],            // optional — for assortments, the packs inside
 }
 ```
 
-**About `priceInr`:** prices exist in the data file for the team's reference
-only. They are stripped on the server (`toPublic` in
-[`lib/catalog.ts`](lib/catalog.ts)) before products reach the browser, and no
-component renders them. Keep it that way — pricing is shared per enquiry.
+**About `priceInr`:** this is the pack MRP, the consumer price printed on the
+pack. It renders as "MRP ₹…" on every card and detail page and goes into the
+Product JSON-LD as an Offer. Trade pricing is still handled by enquiry.
+
+**Products without a photo yet:** leave `image` out and the site renders a
+typographic placeholder (product name on its range colour). To add the photo,
+save it as `public/products/<code>.webp` and set `image: "/products/<code>.webp"`.
 
 Category names, accent colours and blurbs live in `CATEGORY_META` in
 [`lib/catalog.ts`](lib/catalog.ts).
@@ -111,7 +116,7 @@ All three drive the local Chrome install against a running dev server:
 ```bash
 node scripts/shoot.mjs    http://localhost:3000 ./shots home   # full-page shots at 375/768/1440
 node scripts/inspect.mjs  http://localhost:3000 ./shots        # every route x desktop+mobile, plus a defect scan
-node scripts/qa-crawl.mjs http://localhost:3000                # asserts no ₹, no broken images/alts, filter counts
+node scripts/qa-crawl.mjs http://localhost:3000                # asserts MRP renders, no broken images/alts, filter counts
 ```
 
 `inspect.mjs` flags console errors, failed requests, horizontal overflow,

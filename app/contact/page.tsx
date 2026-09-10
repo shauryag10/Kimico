@@ -5,7 +5,7 @@ import { CATALOGUE_PDF, COMPANY } from "@/lib/site";
 export const metadata: Metadata = {
   title: "Contact & Distribution",
   description:
-    "Distributor, wholesale and general enquiries for Kimico Foods, Ahmedabad. Request trade pricing, pack specifications and the full retail catalogue.",
+    "Buyer, wholesale and general enquiries for Kimico Foods, Ahmedabad. Request trade pricing, pack specifications and the full retail catalogue.",
 };
 
 type SearchParams = Promise<Record<string, string | string[] | undefined>>;
@@ -26,9 +26,8 @@ export default async function ContactPage({
           Let’s talk <em className="display-wonk italic text-brand-red">sweet business</em>
         </h1>
         <p className="mt-6 max-w-xl text-base leading-relaxed text-ink-soft sm:text-lg">
-          Two ways in: a distributor & wholesale enquiry for trade pricing and
-          carton specs, or a general enquiry for everything else. Either way, a
-          human reads it.
+          Two ways in: a buyer & wholesale enquiry for trade pricing and
+          carton specs, or a general enquiry for everything else.
         </p>
       </header>
 

@@ -92,7 +92,7 @@ export default function Hero() {
                 href="/contact"
                 className="press rounded-full border-2 border-cocoa/25 px-7 py-[0.9rem] text-sm font-semibold text-cocoa transition-[transform,border-color,color] hover:border-brand-red hover:text-brand-red"
               >
-                Become a distributor
+                Become a buyer
               </Link>
             </motion.div>
           </div>

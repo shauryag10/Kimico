@@ -144,7 +144,7 @@ export default function ContactForm({ initialSku }: { initialSku: string }) {
             [
               {
                 value: "distributor",
-                title: "Distributor & wholesale",
+                title: "Buyer & wholesale",
                 sub: "Stocking, carton pricing, territories",
               },
               {
@@ -275,7 +275,7 @@ export default function ContactForm({ initialSku }: { initialSku: string }) {
 
       <div className="grid gap-5 sm:grid-cols-[minmax(0,14rem)_1fr]">
         <div>
-          <Field id="cf-sku" label="Item code" optional>
+          <Field id="cf-sku" label="Item code">
             {(aria) => (
               <input
                 type="text"

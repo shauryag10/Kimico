@@ -170,7 +170,7 @@ export default function Header() {
               onClick={closeMenu}
               className="rounded-full bg-brand-red px-5 py-3 text-center text-sm font-semibold text-white"
             >
-              Become a distributor
+              Become a buyer
             </Link>
             <a
               href={CATALOGUE_PDF}

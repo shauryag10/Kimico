@@ -3,6 +3,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { Reveal } from "@/components/motion";
 import { COMPANY } from "@/lib/site";
+import { products } from "@/data/products";
 
 export const metadata: Metadata = {
   title: "About Us",
@@ -25,25 +26,15 @@ const VALUES = [
   },
 ];
 
-// TODO: client to confirm real milestones for the timeline below.
-const TIMELINE: { year: string; text: string; todo?: boolean }[] = [
+// Journey entries render in order — add { year, text } as milestones are confirmed.
+const TIMELINE: { year: string; text: string }[] = [
   {
     year: "1988",
     text: "The late Shri Jhamandas Mehtani establishes the Kimmy Group of Companies in Ahmedabad, with a promise of a refreshing experience in every wrapper.",
   },
   {
-    year: "TODO",
-    text: "TODO: add milestone — e.g. launch of the KIMICO brand, first major range, or facility expansion.",
-    todo: true,
-  },
-  {
-    year: "TODO",
-    text: "TODO: add milestone — e.g. introduction of truffles / eclairs lines, new markets reached.",
-    todo: true,
-  },
-  {
     year: "Today",
-    text: "Under Shri Nareshkumar Jhamandas Mehtani, the house spans 49 products across chocolates, truffles, toffees, jellies and novelty candy — sold under the KIMICO and KIMMY marks.",
+    text: `Under Shri Nareshkumar Jhamandas Mehtani, the house spans ${products.length} products across chocolates, truffles, toffees, jellies and novelty candy — sold under the KIMICO and KIMMY marks.`,
   },
 ];
 
@@ -146,7 +137,7 @@ export default function AboutPage() {
               id="timeline-heading"
               className="display-soft font-display text-4xl font-semibold text-cocoa sm:text-5xl"
             >
-              Milestones, {COMPANY.founded} → today
+              Journey, {COMPANY.founded} → today
             </h2>
           </Reveal>
           <ol className="mt-14 space-y-0">
@@ -158,18 +149,12 @@ export default function AboutPage() {
                     className="absolute -left-[9px] top-1 h-4 w-4 rounded-full border-2 border-brand-gold bg-cream"
                   />
                   <p
-                    className={`font-display text-3xl font-semibold ${
-                      t.todo ? "italic text-ink-soft/60" : "text-cocoa"
-                    }`}
+                    className="font-display text-3xl font-semibold text-cocoa"
                   >
                     {t.year}
                   </p>
                   <p
-                    className={`max-w-2xl leading-relaxed ${
-                      t.todo
-                        ? "rounded-2xl border-2 border-dashed border-brand-gold/40 bg-white/50 p-4 text-sm italic text-ink-soft"
-                        : "text-ink-soft"
-                    }`}
+                    className="max-w-2xl leading-relaxed text-ink-soft"
                   >
                     {t.text}
                   </p>

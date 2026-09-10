@@ -43,8 +43,8 @@ const SLIDES: Slide[] = [
   {
     name: "Truffles",
     line: "Creme-filled cacao truffles, twist-wrapped like little gifts.",
-    image: "/products/km-19.webp",
-    alt: "Kimico Truffles handled boxes in six flavours",
+    image: "/products/km-18.webp",
+    alt: "Kimico Truffles boxes in six flavours",
     href: "/products/truffles-box",
     panel: "bg-[linear-gradient(160deg,#7a4a22,#3e2311)]",
     text: "text-cream",

@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
-import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
+import ProductArt from "@/components/ProductArt";
 import ProductCard from "@/components/ProductCard";
 import { Reveal } from "@/components/motion";
 import { products } from "@/data/products";
@@ -33,7 +33,7 @@ export async function generateMetadata({
     openGraph: {
       title: product.name,
       description: product.description,
-      images: [{ url: product.image }],
+      ...(product.image ? { images: [{ url: product.image }] } : {}),
     },
   };
 }
@@ -60,17 +60,27 @@ export default async function ProductDetailPage({ params }: { params: Params }) 
       : []),
   ];
 
-  // Product schema deliberately carries no price/offer information.
+  // Product schema. MRP is the printed consumer price, so it is published as
+  // an Offer; availability is not tracked, so none is claimed.
   const jsonLd = {
     "@context": "https://schema.org",
     "@type": "Product",
     name: product.name,
     sku: product.code,
-    image: `${SITE_URL}${product.image}`,
+    ...(product.image ? { image: `${SITE_URL}${product.image}` } : {}),
     description: product.description,
     brand: { "@type": "Brand", name: product.brand },
     category: product.category,
     manufacturer: { "@type": "Organization", name: COMPANY.name },
+    ...(product.priceInr !== undefined
+      ? {
+          offers: {
+            "@type": "Offer",
+            price: product.priceInr,
+            priceCurrency: "INR",
+          },
+        }
+      : {}),
   };
 
   return (
@@ -117,15 +127,7 @@ export default async function ProductDetailPage({ params }: { params: Params }) 
               className="absolute left-0 top-0 h-1.5 w-full"
               style={{ backgroundColor: meta.accent }}
             />
-            <Image
-              src={product.image}
-              alt={product.name}
-              width={1200}
-              height={900}
-              priority
-              sizes="(min-width: 1024px) 45vw, 92vw"
-              className="max-h-[26rem] w-auto max-w-full object-contain drop-shadow-[0_34px_38px_rgba(42,24,16,0.3)]"
-            />
+            <ProductArt product={product} variant="plate" priority />
           </div>
           </Reveal>
 
@@ -142,6 +144,11 @@ export default async function ProductDetailPage({ params }: { params: Params }) 
               <span className="rounded-full border border-cocoa/20 px-3 py-1 font-mono text-xs font-semibold text-cocoa">
                 {product.code}
               </span>
+              {product.palmOilFree && (
+                <span className="rounded-full bg-[#1f7a3f] px-3 py-1 text-[0.7rem] font-bold uppercase tracking-[0.16em] text-white">
+                  Palm oil free
+                </span>
+              )}
             </div>
             <h1 className="display-soft mt-5 font-display text-4xl font-semibold leading-[1.05] text-cocoa sm:text-5xl">
               {product.name}
@@ -149,25 +156,43 @@ export default async function ProductDetailPage({ params }: { params: Params }) 
             <p className="mt-5 text-lg leading-relaxed text-ink-soft">
               {product.description}
             </p>
-
-            {product.flavours && product.flavours.length > 0 && (
-              <div className="mt-7">
-                <h2 className="text-[0.7rem] font-bold uppercase tracking-[0.24em] text-ink-soft">
-                  Flavours
-                </h2>
-                <ul className="mt-3 flex flex-wrap gap-2">
-                  {product.flavours.map((f) => (
-                    <li
-                      key={f}
-                      className="rounded-full px-3.5 py-1.5 text-sm font-medium text-cocoa"
-                      style={{ backgroundColor: meta.tint }}
-                    >
-                      {f}
-                    </li>
-                  ))}
-                </ul>
-              </div>
+            {product.priceInr !== undefined && (
+              <p className="mt-6 flex flex-wrap items-baseline gap-x-2.5 gap-y-1">
+                <span className="text-[0.7rem] font-bold uppercase tracking-[0.24em] text-ink-soft">
+                  MRP
+                </span>
+                <span className="font-display text-4xl font-semibold text-cocoa">
+                  ₹{product.priceInr}
+                </span>
+                <span className="text-xs text-ink-soft">incl. of all taxes</span>
+              </p>
             )}
+
+            {(
+              [
+                ["Flavours", product.flavours],
+                ["Inside the pack", product.contents],
+              ] as [string, string[] | undefined][]
+            )
+              .filter(([, items]) => items && items.length > 0)
+              .map(([label, items]) => (
+                <div key={label} className="mt-7">
+                  <h2 className="text-[0.7rem] font-bold uppercase tracking-[0.24em] text-ink-soft">
+                    {label}
+                  </h2>
+                  <ul className="mt-3 flex flex-wrap gap-2">
+                    {items!.map((f) => (
+                      <li
+                        key={f}
+                        className="rounded-full px-3.5 py-1.5 text-sm font-medium text-cocoa"
+                        style={{ backgroundColor: meta.tint }}
+                      >
+                        {f}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              ))}
 
             <div className="mt-8 overflow-hidden rounded-2xl border border-cocoa/15">
               <h2 className="sr-only">Pack specification</h2>

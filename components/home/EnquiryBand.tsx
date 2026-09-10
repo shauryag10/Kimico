@@ -1,9 +1,10 @@
 import Image from "next/image";
+import { products } from "@/data/products";
 import Link from "next/link";
 import { Reveal } from "@/components/motion";
 import { COMPANY } from "@/lib/site";
 
-/** Full-bleed brand-red statement band — the distributor call to action. */
+/** Full-bleed brand-red statement band — the buyer call to action. */
 export default function EnquiryBand() {
   return (
     <section
@@ -52,7 +53,7 @@ export default function EnquiryBand() {
             Put <em className="italic">happiness</em> on your shelves
           </h2>
           <p className="mt-6 max-w-xl text-base leading-relaxed text-white/85 sm:text-lg">
-            Retailer, wholesaler or distributor — tell us about your market and
+            Retailer, wholesaler or bulk buyer — tell us about your market and
             we’ll come back with pack specifications, carton details and trade
             pricing for the ranges you care about.
           </p>
@@ -63,7 +64,7 @@ export default function EnquiryBand() {
               href="/contact"
               className="press rounded-full bg-white px-8 py-4 text-sm font-bold text-brand-red shadow-lift transition-[transform,background-color] hover:bg-cream"
             >
-              Start a distributor enquiry
+              Start a buyer enquiry
             </Link>
             <a
               href={COMPANY.phoneHref}
@@ -73,7 +74,7 @@ export default function EnquiryBand() {
             </a>
           </div>
           <ul className="mt-10 flex flex-wrap gap-x-10 gap-y-3 text-sm font-medium text-white/90">
-            {["49-product range", "Carton-wise pack specs", "Pricing on request"].map((t) => (
+            {[`${products.length}-product range`, "Carton-wise pack specs", "MRP on every pack, trade pricing on request"].map((t) => (
               <li key={t} className="flex items-center gap-2.5">
                 <span aria-hidden="true" className="h-1.5 w-1.5 rounded-full bg-white" />
                 {t}
