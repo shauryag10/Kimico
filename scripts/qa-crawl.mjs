@@ -23,6 +23,7 @@ const routes = [
   "/about",
   "/contact?sku=KM-07",
   "/definitely-missing-page",
+  "/products/i-love-you-pop", // retired SKU — must be a real 404
   ...slugs.map((s) => `/products/${s}`),
 ];
 
@@ -49,7 +50,7 @@ for (const route of routes) {
   const resp = await page.goto(BASE + route, { waitUntil: "domcontentloaded", timeout: 45000 });
   await new Promise((r) => setTimeout(r, route === "/" ? 1500 : 600));
   const status = resp?.status() ?? 0;
-  const expected404 = route === "/definitely-missing-page";
+  const expected404 = route === "/definitely-missing-page" || route === "/products/i-love-you-pop";
   if (expected404 ? status !== 404 : status !== 200) {
     failures.push(`${route}: HTTP ${status}`);
     continue;

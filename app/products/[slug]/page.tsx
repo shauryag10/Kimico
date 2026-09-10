@@ -15,6 +15,12 @@ import { COMPANY, SITE_URL } from "@/lib/site";
 
 type Params = Promise<{ slug: string }>;
 
+// Every product is prerendered from data/products.ts. Refusing unknown slugs
+// here makes a retired or mistyped SKU a router-level 404 with a real 404
+// status; with on-demand rendering, notFound() fires inside the root
+// loading.tsx Suspense boundary after a 200 shell has already streamed.
+export const dynamicParams = false;
+
 export function generateStaticParams() {
   return products.map((p) => ({ slug: p.slug }));
 }
