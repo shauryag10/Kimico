@@ -43,7 +43,7 @@ export default function Footer() {
             <ul className="mt-4 space-y-2.5 text-sm">
               {[
                 { href: "/products", label: "All products" },
-                { href: "/brands", label: "Our brands" },
+                { href: "/collections", label: "Collections" },
                 { href: "/about", label: "About us" },
                 { href: "/contact", label: "Contact & distribution" },
               ].map((l) => (

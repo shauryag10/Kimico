@@ -9,7 +9,7 @@ import { CATALOGUE_PDF } from "@/lib/site";
 
 const NAV = [
   { href: "/products", label: "Products" },
-  { href: "/brands", label: "Brands" },
+  { href: "/collections", label: "Collections" },
   { href: "/about", label: "About" },
   { href: "/contact", label: "Contact" },
 ];

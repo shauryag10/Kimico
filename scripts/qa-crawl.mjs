@@ -19,7 +19,7 @@ if (!slugs) {
 const routes = [
   "/",
   "/products",
-  "/brands",
+  "/collections",
   "/about",
   "/contact?sku=KM-07",
   "/definitely-missing-page",

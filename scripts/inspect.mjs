@@ -11,7 +11,7 @@ const ROUTES = [
   ["home", "/"],
   ["products", "/products"],
   ["detail", "/products/truffles-box"],
-  ["brands", "/brands"],
+  ["collections", "/collections"],
   ["about", "/about"],
   ["contact", "/contact?sku=KM-18"],
   ["notfound", "/definitely-missing"],

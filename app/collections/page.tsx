@@ -4,7 +4,7 @@ import Link from "next/link";
 import { Reveal } from "@/components/motion";
 
 export const metadata: Metadata = {
-  title: "Our Brands",
+  title: "Collections",
   description:
     "Meet the names on the wrapper — Wonderbar, Truffles, Temptations, Luxury Selection, Savor, the Eclairs family, My-Chew, Milky Malai Mithai and Cacao Ertugrul.",
 };

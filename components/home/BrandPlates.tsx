@@ -4,7 +4,7 @@ import { Reveal } from "@/components/motion";
 /** Two arched brand plates — KIMICO and KIMMY — side by side. */
 export default function BrandPlates() {
   return (
-    <section aria-label="Our brands" className="mx-auto max-w-[90rem] px-5 pb-24 pt-20 sm:px-10 lg:pb-32">
+    <section aria-label="Kimico and Kimmy" className="mx-auto max-w-[90rem] px-5 pb-24 pt-20 sm:px-10 lg:pb-32">
       <div className="grid gap-8 md:grid-cols-2">
         <Reveal>
           <Link
