@@ -55,6 +55,10 @@ for (const route of routes) {
     failures.push(`${route}: HTTP ${status}`);
     continue;
   }
+  if (expected404) {
+    checked++; // correct 404 — nothing else to audit on the not-found page
+    continue;
+  }
   const audit = await page.evaluate(() => {
     const rupee = document.documentElement.outerHTML.includes("\u20B9");
     const imgs = Array.from(document.images);

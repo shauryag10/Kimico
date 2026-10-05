@@ -690,6 +690,7 @@ export const products: Product[] = [
     piecesPerPack: 30,
     unitsPerCarton: '24 boxes/carton',
     priceInr: 150,
+    image: '/products/km-50.webp',
   },
   {
     code: 'KM-51',
@@ -704,6 +705,7 @@ export const products: Product[] = [
     piecesPerPack: 50,
     unitsPerCarton: '16 containers/carton',
     priceInr: 300,
+    image: '/products/km-51.webp',
     palmOilFree: true,
   },
   {
@@ -719,6 +721,7 @@ export const products: Product[] = [
     piecesPerPack: 70,
     unitsPerCarton: '12 boxes/carton',
     priceInr: 350,
+    image: '/products/km-52.webp',
   },
   {
     code: 'KM-53',
@@ -733,6 +736,7 @@ export const products: Product[] = [
     piecesPerPack: 30,
     unitsPerCarton: '24 containers/carton',
     priceInr: 150,
+    image: '/products/km-53.webp',
   },
   {
     code: 'KM-54',
@@ -747,6 +751,7 @@ export const products: Product[] = [
     piecesPerPack: 100,
     unitsPerCarton: '40 packs/carton',
     priceInr: 100,
+    image: '/products/km-54.webp',
   },
   {
     code: 'KM-55',
@@ -761,5 +766,6 @@ export const products: Product[] = [
     piecesPerPack: 100,
     unitsPerCarton: '32 packets/carton',
     priceInr: 100,
+    image: '/products/km-55.webp',
   },
 ];
